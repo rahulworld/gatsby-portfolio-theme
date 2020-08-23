@@ -9,37 +9,6 @@ import {
 import Img from "gatsby-image"
 
 
-// graphql`
-//   query {
-//     allImageSharp {
-//       edges {
-//         node {
-//           id
-//           fluid(maxWidth: 200, maxHeight: 200) {
-//             ...GatsbyImageSharpFluid
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
-
-// allImageSharp {
-//     edges {
-//       node {
-//         id
-//         fluid(maxHeight: 200, maxWidth: 200) {
-//           src
-//           srcSet
-//           base64
-//           aspectRatio
-//           originalImg
-//           sizes        
-//         }
-//       }
-//     }
-//   }
-
 const CustomCard = (props) => {
     const data = useStaticQuery(graphql`
         query {
@@ -63,7 +32,7 @@ const CustomCard = (props) => {
         <div>
             <Card>
                 <CardBody>
-                    <CardTitle>{props.cardTitle}</CardTitle>
+                    <CardTitle style={{ fontSize: 30 }}>{props.cardTitle}</CardTitle>
                     {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
                 </CardBody>
                 <Img fluid={cardImageFluid} alt={props.imageName} />

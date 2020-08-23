@@ -13,9 +13,6 @@ import CustomCard from "../components/card"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
     <Row>
       <Col md="6">
         <CustomCard cardTitle="Profile" description="My Profile" redirectPage="profile" imageName='rahulworld.jpeg' />

@@ -1,6 +1,8 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
+import { graphql, StaticQuery } from 'gatsby'
 import React from "react"
+import BackgroundImage from 'gatsby-background-image'
 
 
 import { UncontrolledCarousel } from 'reactstrap';
@@ -29,38 +31,87 @@ const items = [
   }
 ];
 
-const Header = ({ siteTitle }) => (
-      <UncontrolledCarousel items={items} />
-)
 // const Header = ({ siteTitle }) => (
-//   <header
-//     style={{
-//       background: `rebeccapurple`,
-//       marginBottom: `1.45rem`,
-//     }}
-//   >
-//     <div
-//       style={{
-//         margin: `0 auto`,
-//         maxWidth: 960,
-//         padding: `1.45rem 1.0875rem`,
-//       }}
-//     >
-//       <h1 style={{ margin: 0 }}>
-//         <Link
-//           to="/"
-//           style={{
-//             color: `white`,
-//             textDecoration: `none`,
-//           }}
-//         >
-//           {siteTitle}
-//         </Link>
-//       </h1>
 //       <UncontrolledCarousel items={items} />
-//     </div>
-//   </header>
 // )
+const Header = ({ siteTitle }) => (
+  <StaticQuery
+    query={graphql`
+      query {
+        placeholderImage: file(relativePath: { eq: "backgroud-image.jpg" }) {
+          childImageSharp {
+            fluid(quality: 90, maxWidth: 1920, maxHeight: 400) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
+    `}
+    render={data => {
+      // Set ImageData.
+      const imageData = data.placeholderImage.childImageSharp.fluid
+      return (
+        <BackgroundImage
+          Tag="section"
+          // className={className}
+          fluid={imageData}
+          backgroundColor={`#040e18`}
+          backgroundSize="cover"
+          style={{ alignItems: 'center', justifyContent: 'center' }}
+        >
+          {/* <h2>gatsby-background-image</h2> */}
+          <div
+            style={{
+              margin: `0 auto`,
+              maxWidth: 960,
+              padding: `1.45rem 1.0875rem`,
+              justifyContent: 'center',
+              height: 400,
+            }}
+          >
+            <h1 style={{ margin: 0, textAlign: 'center', alignItems: 'center', justifyContent: 'center', marginTop: 120 }}>
+              <Link
+                to="/"
+                style={{
+                  color: `white`,
+                  textDecoration: `none`,
+                }}
+              >
+                {siteTitle}
+              </Link>
+            </h1>
+          </div>
+          {/* <header
+            style={{
+              background: `rebeccapurple`,
+              marginBottom: `1.45rem`,
+            }}
+          >
+            <div
+              style={{
+                margin: `0 auto`,
+                maxWidth: 960,
+                padding: `1.45rem 1.0875rem`,
+              }}
+            >
+              <h1 style={{ margin: 0 }}>
+                <Link
+                  to="/"
+                  style={{
+                    color: `white`,
+                    textDecoration: `none`,
+                  }}
+                >
+                  {siteTitle}
+                </Link>
+              </h1>
+            </div>
+          </header> */}
+        </BackgroundImage>
+      )
+    }}
+  />
+)
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
